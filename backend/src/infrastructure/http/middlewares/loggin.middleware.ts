@@ -13,8 +13,8 @@ export class LoggingMiddleware implements NestMiddleware {
     const appVersion = headers['app-version'];
     const userAgent = headers['user-agent'];
     if (!headers['content-type']) headers['content-type'] = 'application/json';
-    const { userId } = getSessionData(token);
-    const message = `${appVersion} - ${method} ${originalUrl} ${ip} ${userAgent} (${userId})`;
+    // const { userId } = getSessionData(token);
+    const message = `${appVersion} - ${method} ${originalUrl} ${ip} ${userAgent} ()`;
     this.logger.log(message);
 
     next();
