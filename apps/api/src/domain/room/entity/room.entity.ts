@@ -14,8 +14,8 @@ export class Room {
   @Property()
   name: string;
 
-  @ManyToOne()
-  created_by: Room;
+  // @ManyToOne()
+  // createdBy: Room;
 
   [EntityRepositoryType]?: RoomRepository;
 }
