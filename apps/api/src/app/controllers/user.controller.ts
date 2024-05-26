@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { CreateUserUseCase } from '@api/core/use-cases/create-user.use-case';
+import { CreateUserDto } from '@api/shared/dtos/user/create-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -12,6 +13,6 @@ export class UserController {
 
   @Get()
   async findAll() {
-    return this.createUserUseCase.findAll();
+    // return this.createUserUseCase.findAll();
   }
 }
