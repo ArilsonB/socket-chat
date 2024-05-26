@@ -13,6 +13,8 @@ export class UserController {
 
   @Get()
   async findAll() {
+
+    return 'Olá';
     // return this.createUserUseCase.findAll();
   }
 }

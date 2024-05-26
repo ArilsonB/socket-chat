@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
+import { UserModule } from './app/modules/user.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
     }),
     CacheModule.register(),
     DatabaseModule,
+    UserModule,
   ],
   controllers: [],
   providers: [

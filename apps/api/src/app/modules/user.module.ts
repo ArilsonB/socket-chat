@@ -13,10 +13,10 @@ import { User } from '../../core/domain/user.entity';
   ],
   controllers: [UserController],
   providers: [
+    { provide: 'UserRepository', useClass: UserRepositoryImpl },
     UserService,
     // CreateUserUseCase,
     // FindAllUsersUseCase,
-    { provide: 'UserRepository', useClass: UserRepositoryImpl },
   ],
   exports: [UserService],
 })
