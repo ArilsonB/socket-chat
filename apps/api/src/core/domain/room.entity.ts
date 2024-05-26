@@ -6,6 +6,7 @@ import {
 } from '@mikro-orm/core';
 
 // @Entity({ repository: () => RoomRepository })
+@Entity()
 export class Room {
   @Property({ primary: true, index: true })
   id: number;

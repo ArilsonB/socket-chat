@@ -3,7 +3,7 @@ import { DatabaseModule } from '@api/infrastructure/database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
-import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -11,6 +11,7 @@ import { CacheInterceptor } from '@nestjs/cache-manager';
       isGlobal: true,
       envFilePath: '.env',
     }),
+    CacheModule.register(),
     DatabaseModule,
   ],
   controllers: [],
