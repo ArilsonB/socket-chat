@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from '@api/infrastructure/database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -11,6 +14,15 @@ import { ConfigModule } from '@nestjs/config';
     DatabaseModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggerInterceptor,
+    },
+  ],
 })
 export class AppModule {}

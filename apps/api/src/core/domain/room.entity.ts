@@ -4,9 +4,8 @@ import {
   ManyToOne,
   Property,
 } from '@mikro-orm/core';
-import { RoomRepository } from './room.repository';
 
-@Entity({ repository: () => RoomRepository })
+// @Entity({ repository: () => RoomRepository })
 export class Room {
   @Property({ primary: true, index: true })
   id: number;
@@ -16,6 +15,6 @@ export class Room {
 
   // @ManyToOne()
   // createdBy: Room;
-
-  [EntityRepositoryType]?: RoomRepository;
+  //
+  // [EntityRepositoryType]?: RoomRepository;
 }
