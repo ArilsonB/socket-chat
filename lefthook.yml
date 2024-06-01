@@ -3,3 +3,11 @@ pre-commit:
   commands:
     test:
       run: pnpm test
+commit-msg:
+  scripts:
+    "commitlint.sh":
+      runner: bash
+# commit-msg:
+#   scripts:
+#    "format-checker.sh":
+#     runner: bash
