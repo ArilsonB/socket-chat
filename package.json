@@ -8,7 +8,7 @@
     "build:web": "pnpm --filter web build",
     "start:api": "pnpm --filter api start:prod",
     "start:web": "pnpm --filter web start",
-    "prepare": "husky",
+    "prepare": "lefthook",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
