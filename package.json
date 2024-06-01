@@ -9,7 +9,7 @@
     "start:api": "pnpm --filter api start:prod",
     "start:web": "pnpm --filter web start",
     "prepare": "lefthook",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
