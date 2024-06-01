@@ -3,6 +3,7 @@ pre-commit:
   commands:
     test:
       run: pnpm test
+      
 commit-msg:
   scripts:
     "commitlint.sh":
