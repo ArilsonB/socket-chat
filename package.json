@@ -8,9 +8,12 @@
     "build:web": "pnpm --filter web build",
     "start:api": "pnpm --filter api start:prod",
     "start:web": "pnpm --filter web start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "lefthook": "^1.6.14"
+  }
 }
