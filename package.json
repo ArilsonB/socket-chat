@@ -8,7 +8,7 @@
     "build:web": "pnpm --filter web build",
     "start:api": "pnpm --filter api start:prod",
     "start:web": "pnpm --filter web start",
-    "prepare": "lefthook",
+    "prepare": "lefthook install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
