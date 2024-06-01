@@ -3,12 +3,14 @@ pre-commit:
   commands:
     test:
       run: pnpm test
-
-commit-msg:
-  parallel: true
-  commands:
     commitlint:
       run: pnpm dlx commitlint --edit
+
+# commit-msg:
+#   parallel: true
+#   commands:
+#     commitlint:
+#       run: pnpm dlx commitlint --edit
 # commit-msg:
 #   scripts:
 #    "format-checker.sh":
