@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { UserController } from '../controllers/user.controller';
 import { UserService } from '../../core/services/user.service';
-import { UserRepositoryImpl } from '../../infrastructure/database/repositories/user.repository';
 // import { CreateUserUseCase } from '../core/use-cases/create-user.use-case';
 // import { FindAllUsersUseCase } from '../core/use-cases/find-all-users.use-case';
 import { User } from '../../core/domain/user.entity';
+import { UserRepository } from '@api/infrastructure/database/repositories';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { User } from '../../core/domain/user.entity';
   ],
   controllers: [UserController],
   providers: [
-    { provide: 'UserRepository', useClass: UserRepositoryImpl },
+    UserRepository,
     UserService,
     // CreateUserUseCase,
     // FindAllUsersUseCase,

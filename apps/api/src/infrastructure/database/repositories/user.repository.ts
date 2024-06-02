@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { EntityRepository } from '@mikro-orm/sqlite';
 import { User } from '@api/core/domain/user.entity';
-import { UserRepository } from '@api/core/ports/user-repository.interface';
 import { InjectRepository } from '@mikro-orm/nestjs';
 
 @Injectable()
-export class UserRepositoryImpl implements UserRepository {
+export class UserRepository {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: EntityRepository<User>,
