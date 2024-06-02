@@ -5,13 +5,8 @@ pre-commit:
       run: pnpm test
     commitlint:
       run: pnpm dlx commitlint --edit
-
-# commit-msg:
-#   parallel: true
-#   commands:
-#     commitlint:
-#       run: pnpm dlx commitlint --edit
-# commit-msg:
-#   scripts:
-#    "format-checker.sh":
-#     runner: bash
+commit-msg:
+  parallel: true
+  commands:
+    commitlint:
+      run: pnpm dlx commitlint --edit
