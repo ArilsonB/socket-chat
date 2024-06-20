@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EntityRepository } from '@mikro-orm/sqlite';
-import { User } from '@api/core/domain/user.entity';
+import { User } from '@api/core/domain/entities/user/user.entity';
 import { InjectRepository } from '@mikro-orm/nestjs';
 
 @Injectable()

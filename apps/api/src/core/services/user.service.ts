@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../ports/user-repository.interface';
-import { User } from '../domain/user.entity';
+import { User } from '../domain/entities/user/user.entity';
 
 @Injectable()
 export class UserService {
