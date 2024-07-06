@@ -1,11 +1,13 @@
-import { Module } from '@nestjs/common'
-import { DatabaseModule } from '@api/infrastructure/database/database.module';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
-import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
-import { UserModule } from './app/modules/user.module';
-
+import { LoggerInterceptor } from './infra/interceptors/logger.interceptor';
+import { UserRepository } from './core/repositories/user.repository';
+import { UsersCacheMemoryRepository } from './data/cache/users-cache-memory-repository';
+import { UserController } from './infra/controllers/user.controller';
+import { GetUsersUseCase } from './app/use-cases/user/get-users.use-case';
+import { CreateUserUseCase } from './app/use-cases/user';
 
 @Module({
   imports: [
@@ -14,15 +16,19 @@ import { UserModule } from './app/modules/user.module';
       envFilePath: '.env',
     }),
     CacheModule.register(),
-    DatabaseModule,
-    UserModule,
   ],
-  controllers: [],
+  controllers: [UserController],
   providers: [
+    CreateUserUseCase,
+    GetUsersUseCase,
     {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
+      provide: UserRepository,
+      useClass: UsersCacheMemoryRepository,
     },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: CacheInterceptor,
+    // },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggerInterceptor,

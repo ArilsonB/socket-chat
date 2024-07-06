@@ -6,6 +6,7 @@ import {
 import { AppModule } from './app.module'
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { SocketAdapter } from './infra/adapters/socket.adapter';
 
 async function bootstrap() {
   const logger = new Logger('Main');
@@ -16,6 +17,8 @@ async function bootstrap() {
   );
 
   const config = app.get<ConfigService>(ConfigService);
+
+  app.useWebSocketAdapter(new SocketAdapter(app));
 
   const port = 3001;
 

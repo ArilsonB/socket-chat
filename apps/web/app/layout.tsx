@@ -11,12 +11,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  authenticated,
+  unauthenticated,
 }: Readonly<{
   children: React.ReactNode;
+  authenticated: React.ReactNode;
+  unauthenticated: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>{authenticated}</body>
     </html>
   );
 }
