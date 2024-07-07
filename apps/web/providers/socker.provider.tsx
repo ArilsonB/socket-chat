@@ -1,8 +1,12 @@
 import { Socket } from "socket.io-client";
-import { socket } from "./socket";
+import { socket } from "../libs/socket";
 import { useEffect, useState } from "react";
 
-export const SocketProvider = () => {
+type SocketProviderProps = {
+  children: React.ReactNode | React.ReactNode[];
+};
+
+export const SocketProvider = ({ children }: SocketProviderProps) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
 
   useEffect(() => {
@@ -19,4 +23,6 @@ export const SocketProvider = () => {
       socket.off("disconnect");
     };
   }, []);
+
+  return <>{children}</>;
 };
