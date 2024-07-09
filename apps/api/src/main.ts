@@ -16,9 +16,15 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.enableCors({
+    origin: ['http://localhost:3001', 'http://localhost:3000'],
+    credentials: true,
+  });
+
   const config = app.get<ConfigService>(ConfigService);
 
   app.useWebSocketAdapter(new SocketAdapter(app));
+
 
   const port = 3001;
 

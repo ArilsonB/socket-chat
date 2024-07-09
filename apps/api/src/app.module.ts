@@ -8,6 +8,8 @@ import { UsersCacheMemoryRepository } from './data/cache/users-cache-memory-repo
 import { UserController } from './infra/controllers/user.controller';
 import { GetUsersUseCase } from './app/use-cases/user/get-users.use-case';
 import { CreateUserUseCase } from './app/use-cases/user';
+import { SocketService } from './app/services/socket.service';
+import { SocketGateway } from './infra/gateways/socket.gateway';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { CreateUserUseCase } from './app/use-cases/user';
       provide: APP_INTERCEPTOR,
       useClass: LoggerInterceptor,
     },
+    SocketService,
+    SocketGateway,
   ],
 })
 export class AppModule {}
