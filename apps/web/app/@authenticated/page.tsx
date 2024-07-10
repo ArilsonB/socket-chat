@@ -1,5 +1,10 @@
+"use client";
+import { useSocket } from "../../hooks/use-socket.hook";
+
 const Home = () => {
-  return <div>AAAA</div>;
+  const socket = useSocket();
+
+  return <div>Your socket id: {socket?.id}</div>;
 };
 
 export default Home;

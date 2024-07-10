@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SocketContext } from "../context/socket.context";
 
 type SocketProviderProps = {
@@ -8,39 +8,50 @@ type SocketProviderProps = {
 
 export const SocketProvider = ({ children }: SocketProviderProps) => {
   const [isConnected, setIsConnected] = useState(false);
+  // const [socket, setSocket] = useState<Socket>(null as unknown as Socket)
+
+  const socket = useRef<Socket>();
 
   const URL =
     process.env.NODE_ENV === "production"
       ? (undefined as unknown as string)
       : "http://localhost:3001";
 
-  const socket = io(URL, {
-    autoConnect: false,
-    auth: { token: "Bearer token" },
-  });
-
   useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
+    if (!isConnected) {
+      socket.current = io(URL, {
+        autoConnect: false,
+        transports: ["websocket"],
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+        auth: { token: "Bearer token" },
+      });
 
-      console.log("Connected to server", socket.id);
-    });
+      socket.current.on("connect", () => {
+        setIsConnected(true);
 
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
+        console.log("Connected to server", socket.current?.id);
+      });
 
-    socket.connect();
+      socket.current.on("disconnect", () => {
+        setIsConnected(false);
+      });
+
+      socket.current.connect();
+    }
 
     return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-      socket.disconnect();
+      if (socket.current) {
+        socket.current.off("connect");
+        socket.current.off("disconnect");
+        if (socket.current.connected) socket.current.disconnect();
+        socket.current.close();
+      }
     };
-  }, [socket]);
+  }, []);
 
   return (
-    <SocketContext.Provider value={{ socket }}>
+    <SocketContext.Provider value={socket.current}>
       {children}
     </SocketContext.Provider>
   );
