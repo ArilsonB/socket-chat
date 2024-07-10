@@ -6,6 +6,12 @@ type SocketProviderProps = {
   children: React.ReactNode | React.ReactNode[];
 };
 
+export type SocketConnectionStatus =
+  | "connecting"
+  | "connected"
+  | "re-connecting"
+  | "closed";
+
 export const SocketProvider = ({ children }: SocketProviderProps) => {
   const [isConnected, setIsConnected] = useState(false);
   // const [socket, setSocket] = useState<Socket>(null as unknown as Socket)
@@ -37,6 +43,36 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
         setIsConnected(false);
       });
 
+      socket.current.on("reconnect", (attempt) => {
+        console.info("Reconnected on attempt: " + attempt);
+        // setConnectionStatus("re-connecting");
+        console.info("Retrying to get watchList ...");
+
+        // socket.emit("retry_watchList", async (watchList: any[]) => {
+        //   console.info("User handshake callback message received");
+        // socketDispatch({
+        //   type: "receive_watchList",
+        //   payload: watchList,
+        // });
+        // });
+      });
+
+      socket.current.on("reconnect_attempt", (attempt) => {
+        console.info("Reconnection Attempt: " + attempt);
+      });
+
+      socket.current.on("reconnect_error", (error) => {
+        console.info("Reconnection error: " + error);
+      });
+
+      socket.current.on("reconnect_failed", () => {
+        console.info("Reconnection failure.");
+        alert(
+          "We are unable to connect you to the watchList service.  Please make sure your internet connection is stable and try again."
+        );
+        setIsConnected(false);
+      });
+
       socket.current.connect();
     }
 
@@ -44,6 +80,10 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
       if (socket.current) {
         socket.current.off("connect");
         socket.current.off("disconnect");
+        socket.current.off("reconnect");
+        socket.current.off("reconnect_attempt");
+        socket.current.off("reconnect_failed");
+        socket.current.off("reconnect_error");
         if (socket.current.connected) socket.current.disconnect();
         socket.current.close();
       }
