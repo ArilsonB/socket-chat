@@ -37,6 +37,11 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
         setIsConnected(true);
 
         console.log("Connected to server", socket.current?.id);
+
+        socket.current?.emit('recover_connected_users', async (users: any) => {
+
+          console.log(users)
+        })
       });
 
       socket.current.on("disconnect", () => {

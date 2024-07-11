@@ -14,10 +14,13 @@ export class SocketService {
     });
 
     console.log(this.connectedClients.size);
-    console.log(Array.from(this.connectedClients.values())[0].id);
-
-    // Handle other events and messages from the client
   }
 
-  // Add more methods for handling events, messages, etc.
+  get connectedClientsCount(): number {
+    return this.connectedClients.size;
+  }
+
+  get connectedClientsList(): Socket[] {
+    return Array.from(this.connectedClients.values());
+  }
 }
