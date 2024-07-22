@@ -1,5 +1,6 @@
 "use client";
 import { useSocket } from "../../hooks/use-socket.hook";
+import { ChatInput } from "./components/chat-input";
 
 const Home = () => {
   const socket = useSocket();
@@ -16,11 +17,7 @@ const Home = () => {
         <div className="flex flex-col flex-1">
           <div className="flex-1 bg-amber-300"></div>
           <div className="flex items-center p-4 flex-row h-24 bg-green-400">
-            <textarea
-              value="aaaa"
-              rows={1}
-              className="bg-white border-none rounded-sm h-12 p-3 flex-1 outline-0"
-            ></textarea>
+            <ChatInput />
           </div>
         </div>
       </div>
