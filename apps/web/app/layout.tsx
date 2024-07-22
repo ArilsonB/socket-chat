@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`h-screen min-w-screen antialiased ${inter.className}`}>
         <Providers>{authenticated}</Providers>
       </body>
     </html>

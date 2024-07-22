@@ -15,7 +15,13 @@ const Home = () => {
         <div className="flex w-72 h-full bg-red-400">aaa</div>
         <div className="flex flex-col flex-1">
           <div className="flex-1 bg-amber-300"></div>
-          <div className="h-24 bg-green-400"></div>
+          <div className="flex items-center p-4 flex-row h-24 bg-green-400">
+            <textarea
+              value="aaaa"
+              rows={1}
+              className="bg-white border-none rounded-sm h-12 p-3 flex-1 outline-0"
+            ></textarea>
+          </div>
         </div>
       </div>
     </div>
