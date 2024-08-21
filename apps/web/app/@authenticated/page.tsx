@@ -16,7 +16,7 @@ const Home = () => {
         <div className="flex w-72 h-full bg-red-400">aaa</div>
         <div className="flex flex-col flex-1">
           <div className="flex-1 bg-amber-300"></div>
-          <div className="flex items-center p-4 flex-row h-24 bg-green-400">
+          <div className="flex items-cente px-8 py-4 flex-row h-24 bg-green-400">
             <ChatInput />
           </div>
         </div>
